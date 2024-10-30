@@ -14,35 +14,37 @@ function comenzar(){
 function comprobar() {
     if(fila()){
 
-        ventana();
+        ventana("GANADOR JUGADOR " + jugador);
         
 
     } else if (columna()) {
 
-        ventana();
+        ventana("GANADOR JUGADOR " + jugador);
         
     } else if (diagonal()) {
 
-        ventana();
+        ventana("GANADOR JUGADOR " + jugador);
         
     }
 }
 
 function fila(){
-    return true;
+    const fila1 = [1, 4, 7];
+    const fila2 = [2, 5, 8];
+    const fila3 = [3, 6, 9];
 }
 
 function columna(){
-    
+
 }
 
 function diagonal(){
     
 }
 
-function ventana(){
+function mostrarVentana(mensaje){
     ventana = window.open("", "_blank", "width=200 , height=100, top=50, left=50");
-        ventana.document.write("GANADOR JUGADOS: " + jugador);
+        ventana.document.write(mensaje);
         setTimeout(() => {
             ventana.close();
             comenzar();
