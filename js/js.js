@@ -19,7 +19,7 @@ window.addEventListener('load', () => {
         if ((turno == "x" && e.target.src.includes("x.jpg")) || (turno == "o" && e.target.src.includes("o.jpg"))) {
             e.dataTransfer.setData("text/plain", e.target.id);
         } else {
-            alert("No es tu turno");
+            mostrarVentana("TURNO INCORRECTO");
             e.preventDefault();
         }
     }
@@ -95,7 +95,7 @@ window.addEventListener('load', () => {
 
     function comprobar() {
         if(fila()){
-            mostrarVentana("GANADOR JUGADOR " + turno);
+            mostrarVentana("GANADOR JUGADOR " + turno.toUpperCase());
             if (turno === "x") {
                 victoriasX++;
                 document.getElementById("victoriasX").innerText = victoriasX;
@@ -104,7 +104,7 @@ window.addEventListener('load', () => {
                 document.getElementById("victoriasO").innerText = victoriasO;
             }
         } else if (columna()) {
-            mostrarVentana("GANADOR JUGADOR " + turno);
+            mostrarVentana("GANADOR JUGADOR " + turno.toUpperCase());
             if (turno === "x") {
                 victoriasX++;
                 document.getElementById("victoriasX").innerText = victoriasX;
@@ -113,7 +113,7 @@ window.addEventListener('load', () => {
                 document.getElementById("victoriasO").innerText = victoriasO;
             }
         } else if (diagonal()) {
-            mostrarVentana("GANADOR JUGADOR " + turno);
+            mostrarVentana("GANADOR JUGADOR " + turno.toUpperCase());
             if (turno === "x") {
                 victoriasX++;
                 document.getElementById("victoriasX").innerText = victoriasX;
