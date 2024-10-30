@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
     window.addEventListener('keyup', (e) => {
-        if (e.key == 'F5') {
+        if (e.key == 'r') {
             e.preventDefault();
             comenzar();
         }
@@ -59,15 +59,15 @@ window.addEventListener('load', () => {
 
         if (draggable) {
             e.target.appendChild(draggable);
+            comprobar();
 
             turno = (turno === "x") ? "o" : "x";
 
             actualizarTurnoVisual();
         }
 
-        // comprobar();
+        
     }
-});
 
     function actualizarTurnoVisual() {
         const turnoDisplay = document.querySelector(".juegoPrincipal h1 img");
@@ -80,19 +80,16 @@ window.addEventListener('load', () => {
         let victoriasX = document.getElementById('victoriasX');
         let victoriasO = document.getElementById('victoriasO');
 
-        victoriasX.innerHTML = 0;
-        victoriasO.innerHTML = 0;
-
         boxes.forEach(box => box.innerHTML = "");
     }
 
     function comprobar() {
         if(fila()){
-            ventana("GANADOR JUGADOR " + turno);
+            mostrarVentana("GANADOR JUGADOR " + turno);
         } else if (columna()) {
-            ventana("GANADOR JUGADOR " + turno);
+            mostrarVentana("GANADOR JUGADOR " + turno);
         } else if (diagonal()) {
-            ventana("GANADOR JUGADOR " + turno);
+            mostrarVentana("GANADOR JUGADOR " + turno);
         }
     }
 
@@ -147,7 +144,6 @@ window.addEventListener('load', () => {
             ventana.document.write(mensaje);
             setTimeout(() => {
                 ventana.close();
-                comenzar();
             }, 3000);
     }
     
@@ -180,3 +176,5 @@ window.addEventListener('load', () => {
             return false;
         }
     }
+
+});
