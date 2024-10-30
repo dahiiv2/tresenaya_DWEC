@@ -77,9 +77,6 @@ window.addEventListener('load', () => {
     function comenzar(){
         turno = "x";
         actualizarTurnoVisual();
-        let victoriasX = document.getElementById('victoriasX');
-        let victoriasO = document.getElementById('victoriasO');
-
         boxes.forEach(box => box.innerHTML = "");
     }
 
