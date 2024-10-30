@@ -78,15 +78,49 @@ window.addEventListener('load', () => {
         turno = "x";
         actualizarTurnoVisual();
         boxes.forEach(box => box.innerHTML = "");
+        
+        piezasX.forEach((pieza, index) => {
+            const originalBox = document.getElementById(`i${index + 1}`);
+            originalBox.appendChild(pieza);
+        });
+    
+        piezasO.forEach((pieza, index) => {
+            const originalBox = document.getElementById(`d${index + 1}`);
+            originalBox.appendChild(pieza);
+        });
     }
+
+    let victoriasX = 0;
+    let victoriasO = 0;
 
     function comprobar() {
         if(fila()){
             mostrarVentana("GANADOR JUGADOR " + turno);
+            if (turno === "x") {
+                victoriasX++;
+                document.getElementById("victoriasX").innerText = victoriasX;
+            } else {
+                victoriasO++;
+                document.getElementById("victoriasO").innerText = victoriasO;
+            }
         } else if (columna()) {
             mostrarVentana("GANADOR JUGADOR " + turno);
+            if (turno === "x") {
+                victoriasX++;
+                document.getElementById("victoriasX").innerText = victoriasX;
+            } else {
+                victoriasO++;
+                document.getElementById("victoriasO").innerText = victoriasO;
+            }
         } else if (diagonal()) {
             mostrarVentana("GANADOR JUGADOR " + turno);
+            if (turno === "x") {
+                victoriasX++;
+                document.getElementById("victoriasX").innerText = victoriasX;
+            } else {
+                victoriasO++;
+                document.getElementById("victoriasO").innerText = victoriasO;
+            }
         }
     }
 
@@ -173,5 +207,6 @@ window.addEventListener('load', () => {
             return false;
         }
     }
+
 
 });
