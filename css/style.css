@@ -48,3 +48,35 @@ img {
     justify-content: center;
     margin-bottom: 10px;
 }
+
+.piezas {
+    border: solid 3px #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+}
+
+.juegoLayout {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.piezas {
+    display: flex;
+    width: 150px;
+    flex-direction: column;
+}
+
+#piezasX .fila, #piezasO .fila {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.juegoPrincipal {
+    width: 400px;
+}
