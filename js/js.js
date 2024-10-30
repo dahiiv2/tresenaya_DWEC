@@ -1,24 +1,29 @@
-const divX = document.querySelector(".x");
-const divO = document.querySelector(".o");
+// Seleccionamos las imágenes de las piezas
+const piezasX = document.querySelectorAll("#piezasX div img");
+const piezasO = document.querySelectorAll("#piezasO div img");
 
-// Inicializamos el turno para que empiece con `.x`
+// Inicializamos el turno para que empiece con `x`
 let turno = "x";
 
-divX.addEventListener("dragstart", dragstart);
-divO.addEventListener("dragstart", dragstart);
+// Asignamos el evento de arrastre a cada imagen de piezas de `x` y `o`
+piezasX.forEach(pieza => pieza.addEventListener("dragstart", dragstart));
+piezasO.forEach(pieza => pieza.addEventListener("dragstart", dragstart));
 
+// Función para el inicio del arrastre, con verificación de turno
 function dragstart(e) {
-    // Verificamos si es el turno del elemento que se está intentando arrastrar
-    if (e.target.classList.contains(turno)) {
-        e.dataTransfer.setData("text/plain", e.target.id);
+    // Verificamos si el elemento que intenta arrastrarse corresponde al turno actual
+    if ((turno == "x" && e.target.src.includes("x.jpg")) || (turno == "o" && e.target.src.includes("o.jpg"))) {
+        e.dataTransfer.setData("text/plain", e.target.id); // Guardamos el ID de la imagen en el evento
     } else {
         alert("No es tu turno");
-        e.preventDefault(); // Cancela el evento de arrastre si no es el turno correcto
+        e.preventDefault(); // Cancela el arrastre si no es el turno correcto
     }
 }
 
-const boxes = document.querySelectorAll(".box");
+// Seleccionamos todos los cuadros del área de juego
+const boxes = document.querySelectorAll(".juegoPrincipal .box");
 
+// Asignamos los eventos de arrastre a cada cuadro en el área de juego
 boxes.forEach(box => {
     box.addEventListener("dragenter", dragEnter);
     box.addEventListener("dragover", dragOver);
@@ -45,19 +50,31 @@ function drop(e) {
     e.preventDefault();
     e.target.classList.remove('drag-over');
 
-    // Verifica si el contenedor (box) ya tiene un elemento dentro
-    if (e.target.querySelector(".x, .o")) {
+    // Verificamos si el cuadro ya tiene una imagen dentro (ocupado)
+    if (e.target.querySelector("img")) {
         alert("Ocupado");
-        return; // Evita que se añada otro elemento
+        return; // Evita que se añada otra pieza si ya está ocupado
     }
 
-    const id = e.dataTransfer.getData('text/plain');
+    const id = e.dataTransfer.getData("text/plain");
     const draggable = document.getElementById(id);
 
-    e.target.appendChild(draggable);
+    // Asegura que estamos agregando solo la imagen al cuadro
+    if (draggable) {
+        e.target.appendChild(draggable);
 
-    // Cambia el turno al otro jugador
-    turno = (turno === "x") ? "o" : "x";
+        // Cambiamos el turno al otro jugador
+        turno = (turno === "x") ? "o" : "x";
+
+        // Actualizamos la indicación visual del turno en el encabezado
+        actualizarTurnoVisual();
+    }
+}
+
+// Función para actualizar la imagen del turno en el encabezado
+function actualizarTurnoVisual() {
+    const turnoDisplay = document.querySelector(".juegoPrincipal h1 img");
+    turnoDisplay.src = turno === "x" ? "img/x.jpg" : "img/o.jpg";
 }
 
 window.addEventListener('load', () => {
