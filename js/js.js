@@ -1,3 +1,11 @@
+window.addEventListener('load', () => {
+    window.addEventListener('keyup', (e) => {
+        if (e.key == 'F5') {
+            e.preventDefault();
+            comenzar();
+        }
+    });
+
 // Seleccionamos las imágenes de las piezas
 const piezasX = document.querySelectorAll("#piezasX div img");
 const piezasO = document.querySelectorAll("#piezasO div img");
@@ -12,6 +20,7 @@ piezasO.forEach(pieza => pieza.addEventListener("dragstart", dragstart));
 // Función para el inicio del arrastre, con verificación de turno
 function dragstart(e) {
     // Verificamos si el elemento que intenta arrastrarse corresponde al turno actual
+    console.log("dragstart");
     if ((turno == "x" && e.target.src.includes("x.jpg")) || (turno == "o" && e.target.src.includes("o.jpg"))) {
         e.dataTransfer.setData("text/plain", e.target.id); // Guardamos el ID de la imagen en el evento
     } else {
@@ -76,14 +85,6 @@ function actualizarTurnoVisual() {
     const turnoDisplay = document.querySelector(".juegoPrincipal h1 img");
     turnoDisplay.src = turno === "x" ? "img/x.jpg" : "img/o.jpg";
 }
-
-window.addEventListener('load', () => {
-    window.addEventListener('keyup', (e) => {
-        if (e.key == 'F5') {
-            e.preventDefault();
-            comenzar();
-        }
-    });
 });
 
 function comenzar(){
