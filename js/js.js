@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
-    window.addEventListener('keyup', (e) => {
-        if (e.key == 'r') {
+    window.addEventListener('keydown', (e) => {
+        if (e.key == 'F5') {
             e.preventDefault();
             comenzar();
         }
